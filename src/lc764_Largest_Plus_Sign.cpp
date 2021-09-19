@@ -72,10 +72,37 @@ public:
     }
 };
 
+//[最高票解法](https://leetcode.com/problems/largest-plus-sign/discuss/113314/JavaC%2B%2BPython-O(N2)-solution-using-only-one-grid-matrix)
+class Solution1 {
+public:
+    int orderOfLargestPlusSign(int n, vector<vector<int>> &mines) {
+        vector<vector<int>> a(n, vector<int>(n, n));
+        for (auto &mine: mines) {
+            a[mine[0]][mine[1]] = 0;
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0, k = n - 1, l = 0, r = 0, u = 0, d = 0; j < n;
+                 j++, k--) {
+                a[i][j] = min(a[i][j], l = (a[i][j] == 0 ? 0 : l + 1));
+                a[i][k] = min(a[i][k], r = (a[i][k] == 0 ? 0 : r + 1));
+                a[j][i] = min(a[j][i], u = (a[j][i] == 0 ? 0 : u + 1));
+                a[k][i] = min(a[k][i], d = (a[k][i] == 0 ? 0 : d + 1));
+            }
+        }
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                res = max(a[i][j], res);
+            }
+        }
+        return res;
+    }
+};
 
 int main() {
-    Solution sol;
-    vector<vector<int>> mines{{4, 2}};
-    cout << sol.orderOfLargestPlusSign(5, mines) << endl;
+    Solution1 sol;
+    vector<vector<int>> mines{{0, 0},
+                              {1, 1}};
+    cout << sol.orderOfLargestPlusSign(2, mines) << endl;
     return 0;
 }
