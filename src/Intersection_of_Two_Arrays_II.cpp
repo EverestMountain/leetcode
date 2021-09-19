@@ -27,6 +27,7 @@ public:
     }
 };
 
+//[题目链接](https://leetcode.com/explore/challenge/card/september-leetcoding-challenge-2021/638/week-3-september-15th-september-21st/3978)
 int main() {
     vector<tuple<vector<int>, vector<int>, vector<int>>> test_cases;
     test_cases.emplace_back(make_tuple<vector<int>, vector<int>, vector<int>>({1, 2, 2, 1}, {2, 2}, {2, 2}));
